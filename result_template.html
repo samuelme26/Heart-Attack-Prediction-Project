@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .semi-sphere {
+          width: 200px;
+          height: 100px;
+          border-radius: 100px 100px 0 0;
+          background: conic-gradient(
+            green 0% 33%,
+            yellow 33% 67%,
+            red 67% 100%
+          );
+        }
+      </style>
+</head>
+<body>
+    <div class="bg-blue-300 h-screen w-screen flex flex-col">
+        <div class="h-12 bg-slate-200 w-screen flex items-center justify-center text-3xl font-bold ">
+            <h1>Results</h1>
+        </div>
+        <div class="bg-yellow-200 w-screen flex-1 flex">
+            <div class="flex-[1_1_0%] flex items-center justify-center">
+                <!-- Add Doctor image here -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hospital w-2/3 h-2/3" viewBox="0 0 16 16">
+                    <path d="M8.5 5.034v1.1l.953-.55.5.867L9 7l.953.55-.5.866-.953-.55v1.1h-1v-1.1l-.953.55-.5-.866L7 7l-.953-.55.5-.866.953.55v-1.1h1ZM13.25 9a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5ZM13 11.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5Zm.25 1.75a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5Zm-11-4a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5A.25.25 0 0 0 3 9.75v-.5A.25.25 0 0 0 2.75 9h-.5Zm0 2a.25.25 0 0 0-.25.25v.5c0 .138.112.25.25.25h.5a.25.25 0 0 0 .25-.25v-.5a.25.25 0 0 0-.25-.25h-.5ZM2 13.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-.5Z"/>
+                    <path d="M5 1a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1a1 1 0 0 1 1 1v4h3a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h3V3a1 1 0 0 1 1-1V1Zm2 14h2v-3H7v3Zm3 0h1V3H5v12h1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3Zm0-14H6v1h4V1Zm2 7v7h3V8h-3Zm-8 7V8H1v7h3Z"/>
+                  </svg>
+            </div>
+            <div class="flex-[2_2_0%] bg-white p-2">
+
+                <h1 class="p-2 text-xl">Health score is <span class="text-xl font-bold">{{data.Heart_attack_risk}}</span></h1>
+                <!-- Add meter here -->
+                {% if data.Heart_attack_risk > 0.75 %}
+                <span class="text-red-500 text-xl">You should consult a doctor immediately.</span>
+                {% elif data.Heart_attack_risk > 0.45  %}
+                <span class="text-yellow-400 text-xl"> You can improve your Heart health by following these suggestions</span>
+                {% else %}
+                <span class="text-green-400 text-xl"> You can improve your Heart health by following these suggestions</span>
+                {% endif %}
+
+                <br>
+                <br>
+                <br>
+                <div class="p-4">
+                    <h1 class="font-bold text-2xl p-2">Suggestions: </h1>
+                    <li>
+                        {% for item in data.Lifestyle_changes %}
+                            <ul>
+                                {{item}}
+                            </ul>
+                        {% endfor %}
+                    </li>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
